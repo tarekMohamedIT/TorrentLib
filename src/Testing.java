@@ -1,7 +1,9 @@
+import com.sun.jndi.toolkit.url.Uri;
 import core.magnets.MagnetLink;
 import enums.MagnetDataType;
 import models.MagnetData;
 
+import java.net.HttpURLConnection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,7 +13,18 @@ public class Testing {
         for (MagnetData data : link.getMagnetData()){
             if (data.getDataType() == MagnetDataType.xt){
                 String[] params = data.getValue().split(":");
+                System.out.print(data.getDataType() + " : ");
 
+                for (int i = 0;i < params.length; i++){
+                    if (i == params.length -1){
+                        for (int j = 0;j < params[i].length(); j += 3){
+                            params[i] = params[i].substring(0, j) + "%" + params[i].substring(j, params[i].length());
+                        }
+                        System.out.println(params[i]);
+                    }
+
+                    else System.out.print(params[i] + ":");
+                }
 
             }
 
