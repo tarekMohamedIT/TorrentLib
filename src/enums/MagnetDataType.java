@@ -1,7 +1,5 @@
 package enums;
 
-import core.MagnetLink;
-
 public enum MagnetDataType {
     xt
     , dn

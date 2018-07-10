@@ -1,4 +1,4 @@
-package core;
+package core.magnets;
 
 import enums.MagnetDataType;
 import models.MagnetData;
