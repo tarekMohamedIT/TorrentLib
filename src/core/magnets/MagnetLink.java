@@ -1,28 +1,39 @@
 package core.magnets;
 
 import enums.MagnetDataType;
+import interfaces.IMagnetLink;
 import models.MagnetData;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-public class MagnetLink {
+public class MagnetLink implements IMagnetLink {
     private List<MagnetData> magnetData;
 
     public MagnetLink(String link){
         magnetData = new ArrayList<>();
-        link = link.replaceFirst("magnet:\\?", "");
+        handleMagnetLink(link);
+    }
 
-        String[] data = link.split("&");
+    @Override
+    public void handleMagnetLink(String magnetLink) {
+        magnetLink = magnetLink.replaceFirst("magnet:\\?", "");
+
+        String[] data = magnetLink.split("&");
 
         for (String param : data){
-            String[] seperatedData = param.split("=");
+            String[] separatedData = param.split("=");
 
-            magnetData.add(new MagnetData(MagnetDataType.valueOf(seperatedData[0].replaceAll(".\\d", "")), seperatedData[1]));
+            addData(new MagnetData(MagnetDataType.valueOf(separatedData[0].replaceAll(".\\d", "")), separatedData[1]));
         }
     }
 
+    @Override
+    public void addData(MagnetData data) {
+        this.magnetData.add(data);
+    }
+
+    @Override
     public List<MagnetData> getMagnetData() {
         return magnetData;
     }
