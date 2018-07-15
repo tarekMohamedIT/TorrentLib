@@ -1,6 +1,7 @@
 package models;
 
 import enums.MagnetDataType;
+import utils.DataFormatter;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,10 +27,7 @@ public class MagnetData {
 
             for (int i = 0;i < params.length; i++){
                 if (i == params.length -1){
-                    for (int j = 0;j < params[i].length(); j += 3){
-                        params[i] = params[i].substring(0, j) + "%" + params[i].substring(j, params[i].length());
-                    }
-                    tmpData.append(params[i]);
+                    tmpData.append(DataFormatter.formatToSha1(params[i]));
                 }
                 tmpData.append(params[i]).append(":");
             }
